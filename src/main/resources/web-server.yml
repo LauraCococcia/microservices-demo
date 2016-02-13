@@ -17,8 +17,8 @@ error:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://localhost:1112/eureka/
 
 # HTTP Server
 server:
-  port: 3333   # HTTP (Tomcat) port
+  port: 3334   # HTTP (Tomcat) port

@@ -1,10 +1,12 @@
 package io.pivotal.microservices.services.web;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * Accounts web-server. Works as a microservice client, fetching data from the
@@ -16,6 +18,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 // Disable component scanner ...
 @ComponentScan(useDefaultFilters = false)
+@EnableAutoConfiguration
+@PropertySource("classpath:db-config.properties")
 public class WebServer {
 
 	/**
@@ -23,6 +27,8 @@ public class WebServer {
 	 * doesn't matter.
 	 */
 	public static final String ACCOUNTS_SERVICE_URL = "http://ACCOUNTS-SERVICE";
+	
+	public static final String PRODUCTS_SERVICE_URL = "http://PRODUCTS-SERVICE";
 
 	/**
 	 * Run the application using Spring Boot and an embedded servlet engine.
@@ -59,5 +65,30 @@ public class WebServer {
 	@Bean
 	public HomeController homeController() {
 		return new HomeController();
+	}
+/**
+ * 
+ * 
+ * 
+ * 	
+ */
+	/**
+	 * The AccountService encapsulates the interaction with the micro-service.
+	 * 
+	 * @return A new service instance.
+	 */
+	@Bean
+	public WebProductsService productsService() {
+		return new WebProductsService(PRODUCTS_SERVICE_URL);
+	}
+
+	/**
+	 * Create the controller, passing it the {@link WebAccountsService} to use.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public WebProductsController productsController() {
+		return new WebProductsController(productsService());
 	}
 }

@@ -53,7 +53,7 @@ public class AccountsWebApplication {
 	/**
 	 * Creates an in-memory "rewards" database populated with test data for fast
 	 * testing
-	 */
+	 *
 	@Bean
 	public DataSource dataSource() {
 		logger.info("dataSource() invoked");
@@ -85,5 +85,5 @@ public class AccountsWebApplication {
 		}
 
 		return dataSource;
-	}
+	}*/
 }

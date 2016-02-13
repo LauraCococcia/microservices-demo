@@ -1,10 +1,11 @@
 package io.pivotal.microservices.services;
 
+import org.springframework.boot.SpringApplication;
+
 import io.pivotal.microservices.services.accounts.AccountsServer;
+import io.pivotal.microservices.services.products.ProductsServer;
 import io.pivotal.microservices.services.registration.RegistrationServer;
 import io.pivotal.microservices.services.web.WebServer;
-
-import org.springframework.boot.SpringApplication;
 
 /**
  * Allow the servers to be invoke from the command-line. The jar is built with
@@ -42,7 +43,10 @@ public class Main {
 			SpringApplication.run(RegistrationServer.class, args);
 		} else if (serverName.equals("accounts")) {
 			SpringApplication.run(AccountsServer.class, args);
-		} else if (serverName.equals("web")) {
+		}else if (serverName.equals("products")) {
+			SpringApplication.run(ProductsServer.class, args);
+		}
+		else if (serverName.equals("web")) {
 			SpringApplication.run(WebServer.class, args);
 		} else {
 			System.out.println("Unknown server type: " + serverName);
