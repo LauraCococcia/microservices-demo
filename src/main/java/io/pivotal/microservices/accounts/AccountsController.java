@@ -83,4 +83,10 @@ public class AccountsController {
 			return accounts;
 		}
 	}
+	
+	@RequestMapping("/login/{user}/{pwd}")
+	public Account login(@PathVariable("user") String user, @PathVariable("pwd") String pwd ){
+		Account account = accountRepository.login(user, pwd);
+		return account;
+	}
 }

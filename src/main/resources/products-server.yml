@@ -17,8 +17,14 @@ error:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:1112/eureka/
+      defaultZone: http://172.20.10.251:1111/eureka/
+  instance:
+    preferIpAddress: true
+    #server ip address
+    ip-address: ${server.address}
 
 # HTTP Server
 server:
   port: 4444   # HTTP (Tomcat) port
+  #server ip address
+  address: 172.20.10.40
