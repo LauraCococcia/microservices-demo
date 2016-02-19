@@ -48,35 +48,25 @@ public class WebProductsService {
 				+ restTemplate.getRequestFactory());
 	}
 
-//	public Account findByNumber(String accountNumber) {
-//
-//		logger.info("findByNumber() invoked: for " + accountNumber);
-//		return restTemplate.getForObject(serviceUrl + "/accounts/{number}",
-//				Account.class, accountNumber);
-//	}
-
-//	public List<Account> byOwnerContains(String name) {
-//		logger.info("byOwnerContains() invoked:  for " + name);
-//		Account[] accounts = null;
-//
-//		try {
-//			accounts = restTemplate.getForObject(serviceUrl
-//					+ "/accounts/owner/{name}", Account[].class, name);
-//		} catch (HttpClientErrorException e) { // 404
-//			// Nothing found
-//		}
-//
-//		if (accounts == null || accounts.length == 0)
-//			return null;
-//		else
-//			return Arrays.asList(accounts);
-//	}
-	
 	public List<Product> findAll(){
 		Product[] products = null;
 		try {
 			products = restTemplate.getForObject(serviceUrl
 					+ "/shop", Product[].class);
+		} catch (HttpClientErrorException e) { // 404
+			// Nothing found
+		}
+		if (products == null || products.length == 0)
+			return null;
+		else
+			return Arrays.asList(products);
+	}
+
+	public List<Product> findProductByCategory(Long category_id) {
+		Product[] products = null;
+		try {
+			products = restTemplate.getForObject(serviceUrl
+					+ "/product/"+ category_id, Product[].class);
 		} catch (HttpClientErrorException e) { // 404
 			// Nothing found
 		}

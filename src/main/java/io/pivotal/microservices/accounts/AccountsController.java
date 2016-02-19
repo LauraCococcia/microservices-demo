@@ -1,12 +1,15 @@
 package io.pivotal.microservices.accounts;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.pivotal.microservices.login.Login;
+import io.pivotal.microservices.login.LoginRepository;
 
 /**
  * A RESTFul controller for accessing account information.
@@ -19,6 +22,7 @@ public class AccountsController {
 	protected Logger logger = Logger.getLogger(AccountsController.class
 			.getName());
 	protected AccountRepository accountRepository;
+	protected LoginRepository loginRepository;
 
 	/**
 	 * Create an instance plugging in the respository of Accounts.
@@ -30,63 +34,27 @@ public class AccountsController {
 	public AccountsController(AccountRepository accountRepository) {
 		this.accountRepository = accountRepository;
 
-		logger.info("AccountRepository says system has "
-				+ accountRepository.countAccounts() + " accounts");
-	}
-
-	/**
-	 * Fetch an account with the specified account number.
-	 * 
-	 * @param accountNumber
-	 *            A numeric, 9 digit account number.
-	 * @return The account if found.
-	 * @throws AccountNotFoundException
-	 *             If the number is not recognised.
-	 */
-	@RequestMapping("/accounts/{accountNumber}")
-	public Account byNumber(@PathVariable("accountNumber") String accountNumber) {
-
-		logger.info("accounts-service byNumber() invoked: " + accountNumber);
-		Account account = accountRepository.findByNumber(accountNumber);
-		logger.info("accounts-service byNumber() found: " + account);
-
-		if (account == null)
-			throw new AccountNotFoundException(accountNumber);
-		else {
-			return account;
-		}
-	}
-
-	/**
-	 * Fetch accounts with the specified name. A partial case-insensitive match
-	 * is supported. So <code>http://.../accounts/owner/a</code> will find any
-	 * accounts with upper or lower case 'a' in their name.
-	 * 
-	 * @param partialName
-	 * @return A non-null, non-empty set of accounts.
-	 * @throws AccountNotFoundException
-	 *             If there are no matches at all.
-	 */
-	@RequestMapping("/accounts/owner/{name}")
-	public List<Account> byOwner(@PathVariable("name") String partialName) {
-		logger.info("accounts-service byOwner() invoked: "
-				+ accountRepository.getClass().getName() + " for "
-				+ partialName);
-
-		List<Account> accounts = accountRepository
-				.findByOwnerContainingIgnoreCase(partialName);
-		logger.info("accounts-service byOwner() found: " + accounts);
-
-		if (accounts == null || accounts.size() == 0)
-			throw new AccountNotFoundException(partialName);
-		else {
-			return accounts;
-		}
+//		logger.info("AccountRepository says system has "
+//				+ accountRepository.countAccounts() + " accounts");
 	}
 	
-	@RequestMapping("/login/{user}/{pwd}")
-	public Account login(@PathVariable("user") String user, @PathVariable("pwd") String pwd ){
-		Account account = accountRepository.login(user, pwd);
-		return account;
+//	@RequestMapping("/login/{user}/{pwd}")
+//	public Account login(@PathVariable("user") String user, @PathVariable("pwd") String pwd ){
+//		Account account = accountRepository.login(user, pwd);
+//		return account;
+//	}
+	
+	@RequestMapping(value="/signup", method = RequestMethod.POST)
+	public Account signup(@RequestBody Account account){
+		logger.info("user-> "+ account.getUsername());
+		logger.info("email-> "+ account.getEmail());
+		
+		Account accountResult = accountRepository.save(account);
+		return accountResult;
+
+//		Login loginAccount = new Login();
+//		loginAccount.setUser(accountResult);
+//		loginAccount.setPassword(pwd);
+//		loginRepository.save(loginAccount);
 	}
 }

@@ -1,0 +1,14 @@
+eureka -> 1111
+
+accoutns -> 2222
+
+web -> 3333
+
+products -> 4444
+
+categories -> 5555
+
+items -> 5556
+
+login -> 5557
+

@@ -7,7 +7,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan("io.pivotal.microservices.products")
+//@EntityScan("{io.pivotal.microservices.products, io.pivotal.microservices.categories}")
+//@EnableJpaRepositories("{io.pivotal.microservices.products, io.pivotal.microservices.categories}")
+@EntityScan("io.pivotal.microservices")
 @EnableJpaRepositories("io.pivotal.microservices.products")
 @PropertySource("classpath:db-config.properties")
 public class ProductsWebApplication {

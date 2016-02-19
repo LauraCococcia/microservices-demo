@@ -28,7 +28,20 @@ public class WebServer {
 	 */
 	public static final String ACCOUNTS_SERVICE_URL = "http://ACCOUNTS-SERVICE";
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	
 	public static final String PRODUCTS_SERVICE_URL = "http://PRODUCTS-SERVICE";
+	
+	public static final String CATEGORIES_SERVICE_URL = "http://CATEGORIES-SERVICE";
+	
+	public static final String ITEMS_SERVICE_URL = "http://ITEMS-SERVICE";
+
+	private static final String LOGIN_SERVICE_URL = "http://LOGIN-SERVICE";
 
 	/**
 	 * Run the application using Spring Boot and an embedded servlet engine.
@@ -90,5 +103,65 @@ public class WebServer {
 	@Bean
 	public WebProductsController productsController() {
 		return new WebProductsController(productsService());
+	}
+	
+	/**
+	 * The AccountService encapsulates the interaction with the micro-service.
+	 * 
+	 * @return A new service instance.
+	 */
+	@Bean
+	public WebCategoriesService categoriesService() {
+		return new WebCategoriesService(CATEGORIES_SERVICE_URL);
+	}
+
+	/**
+	 * Create the controller, passing it the {@link WebAccountsService} to use.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public WebCategoriesController categoriesController() {
+		return new WebCategoriesController(categoriesService());
+	}
+	
+	/**
+	 * The AccountService encapsulates the interaction with the micro-service.
+	 * 
+	 * @return A new service instance.
+	 */
+	@Bean
+	public WebItemsService itemsService() {
+		return new WebItemsService(ITEMS_SERVICE_URL);
+	}
+
+	/**
+	 * Create the controller, passing it the {@link WebAccountsService} to use.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public WebItemsController itemsController() {
+		return new WebItemsController(itemsService());
+	}
+	
+	/**
+	 * The AccountService encapsulates the interaction with the micro-service.
+	 * 
+	 * @return A new service instance.
+	 */
+	@Bean
+	public WebLoginService loginService() {
+		return new WebLoginService(LOGIN_SERVICE_URL);
+	}
+
+	/**
+	 * Create the controller, passing it the {@link WebAccountsService} to use.
+	 * 
+	 * @return
+	 */
+	@Bean
+	public WebLoginController loginController() {
+		return new WebLoginController(loginService());
 	}
 }

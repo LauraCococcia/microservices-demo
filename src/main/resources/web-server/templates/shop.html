@@ -5,13 +5,13 @@
 <head th:replace="header :: peo"></head>
 
 <body>
-	
+
 	<section id="advertisement">
 		<div class="container">
-			<img src="images/shop/advertisement.jpg" alt="" />
+			<img th:src="@{/images/shop/advertisement.jpg}" alt="" />
 		</div>
 	</section>
-	
+
 	<section>
 		<div class="container">
 			<div class="row">
@@ -19,46 +19,60 @@
 					<!-- LEFT SIDEBAR -->
 					<div th:replace="left-sidebar :: peo"></div>
 				</div>
-				
+
 				<div class="col-sm-9 padding-right">
 					<!-- FEATURES ITEMS -->
 					<!--div th:replace="features-items :: peo"></div-->
-					<div class="features_items"><!--features_items-->
+					<div class="features_items">
+						<!--features_items-->
 						<h2 class="title text-center">Features Items</h2>
-						<div th:each="prod : ${products}" class="col-sm-4">
+						<div th:each="item : ${items_collection}" class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<img th:src="${prod.image}" alt="" />
+										<img th:src="${item.product.image}" alt="" />
 										<!-- span th:text="${'images/shop/'+ prod.image}">bla</span-->
-										<h2>$<span th:text="${prod.price}">999999</span></h2>
-										<p><span th:text="${prod.name}">Nome prodotto</span></p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										<h2>
+											$<span th:text="${item.unitCost}">999999</span>
+										</h2>
+										<p>
+											<span th:text="${item.product.name}">Nome prodotto</span>
+										</p>
+										<a href="#" class="btn btn-default add-to-cart"><i
+											class="fa fa-shopping-cart"></i>Add to cart</a>
 									</div>
 									<div class="product-overlay">
 										<div class="overlay-content">
-											<h2>$<span th:text="${prod.price}">999999</span></h2>
-											<p><span th:text="${prod.name}">Nome prodotto</span></p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											<h2>
+												$<span th:text="${item.unitCost}">999999</span>
+											</h2>
+											<p>
+												<span th:text="${item.product.name}">Nome prodotto</span>
+											</p>
+											<a href="#" class="btn btn-default add-to-cart"><i
+												class="fa fa-shopping-cart"></i>Add to cart</a>
 										</div>
 									</div>
 								</div>
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">
-										<li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
+										<li><a href=""><i class="fa fa-plus-square"></i>Add
+												to wishlist</a></li>
+										<li><a href=""><i class="fa fa-plus-square"></i>Add
+												to compare</a></li>
 									</ul>
 								</div>
 							</div>
 						</div>
-						
+
 						<ul class="pagination">
 							<li class="active"><a href="">1</a></li>
 							<li><a href="">2</a></li>
 							<li><a href="">3</a></li>
 							<li><a href="">&raquo;</a></li>
 						</ul>
-					</div><!--features_items-->
+					</div>
+					<!--features_items-->
 				</div>
 			</div>
 		</div>

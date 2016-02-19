@@ -32,7 +32,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
  * @author Paul Chapman
  */
 @SpringBootApplication
-@EntityScan("io.pivotal.microservices.accounts")
+@EntityScan("io.pivotal.microservices")
 @EnableJpaRepositories("io.pivotal.microservices.accounts")
 @PropertySource("classpath:db-config.properties")
 public class AccountsWebApplication {
