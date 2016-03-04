@@ -50,8 +50,8 @@ public class WebAccountsController {
 		account.setEmail("daniele@gmail.com");
 		model.addAttribute("account", account);
 
-		Login login = new Login();
-		model.addAttribute("login", login);
+//		Login login = new Login();
+//		model.addAttribute("login", login);
 		return "login";
 	}
 

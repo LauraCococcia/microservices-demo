@@ -11,4 +11,6 @@ public interface CategoryRepository extends Repository<Category, Long>{
 	 * Metodi di query
 	 */
 	public List<Category> findAll();
+	
+	public Category save(Category cat);
 }

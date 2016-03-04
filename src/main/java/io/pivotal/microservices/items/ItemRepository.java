@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
+import io.pivotal.microservices.products.Product;
+
 public interface ItemRepository extends Repository<Item, Long>{
 
 	@Query("FROM Item")
@@ -17,5 +19,10 @@ public interface ItemRepository extends Repository<Item, Long>{
 //	public List<Item> getByCategory(@Param("category_id") Long category_id);
 
 	public List<Item> findFirst9ByOrderByItemIdAsc();
+
+	@Query("From Product")
+	public List<Product> getProducts();
+
+	public Item save(Item item);
 	
 }

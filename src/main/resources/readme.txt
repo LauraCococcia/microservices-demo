@@ -1,0 +1,1 @@
+java -jar target/microservices.jar server-name [eureka.ip] [db.ip] [maxThreads] [server-port]

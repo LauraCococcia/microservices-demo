@@ -8,6 +8,11 @@ spring:
     cache: false             # Allow Thymeleaf templates to be reloaded at runtime
     prefix: classpath:/products-server/templates/    # Trailing / mandatory
                              # Template location for this application only
+  datasource:
+    max-active: ${spring.datasource.max-active}
+    max-idle: ${spring.datasource.max-idle}
+    max-wait: ${spring.datasource.max-wait}
+    min-idle: ${spring.datasource.min-idle}
 
 # Map the error path to error template (for Thymeleaf)
 error:
@@ -17,15 +22,18 @@ error:
 eureka:
   client:
     serviceUrl:
-      #defaultZone: http://172.20.10.251:1111/eureka/
-      defaultZone: http://localhost:1111/eureka/
+     #defaultZone: http://localhost:1111/eureka/
+     #defaultZone: http://172.20.10.251:1111/eureka/
+      defaultZone: http://${eureka.ip}:1111/eureka/
   instance:
     preferIpAddress: true
     #server ip address
-    #ip-address: ${server.address}
+    ip-address: ${server.address}
 
 # HTTP Server
 server:
   port: 4444   # HTTP (Tomcat) port
   #server ip address
   #address: 172.20.10.40
+  tomcat:
+    max-threads: ${server.tomcat.max-threads}

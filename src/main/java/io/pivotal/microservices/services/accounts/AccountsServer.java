@@ -1,16 +1,20 @@
 package io.pivotal.microservices.services.accounts;
 
-import io.pivotal.microservices.accounts.AccountRepository;
-import io.pivotal.microservices.accounts.AccountsWebApplication;
-
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Import;
+
+import io.pivotal.microservices.accounts.AccountRepository;
+import io.pivotal.microservices.accounts.AccountsWebApplication;
 
 /**
  * Run as a micro-service, registering with the Discovery Server (Eureka).
@@ -33,19 +37,24 @@ public class AccountsServer{
 	@Autowired
 	protected AccountRepository accountRepository;
 
-	protected Logger logger = Logger.getLogger(AccountsServer.class.getName());
+	protected static Logger logger = Logger.getLogger(AccountsServer.class.getName());
 
 	/**
 	 * Run the application using Spring Boot and an embedded servlet engine.
 	 * 
 	 * @param args
 	 *            Program arguments - ignored.
+	 * @throws SocketException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SocketException {
 		// Tell server to look for accounts-server.properties or
 		// accounts-server.yml
+		System.out.println("##############");
+		System.out.println(System.getProperty("server.tomcat.max-threads"));
+		System.out.println("##############");
+		
 		System.setProperty("spring.config.name", "accounts-server");
-
+		
 		SpringApplication.run(AccountsServer.class, args);
 	}
 }

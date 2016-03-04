@@ -3,8 +3,9 @@ package io.pivotal.microservices.items;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 import io.pivotal.microservices.products.Product;
 
 @Entity
-@Table(name="ITEM")
+@Table(name = "ITEM")
 public class Item implements Serializable {
 
 	/* Private Fields */
@@ -22,26 +23,27 @@ public class Item implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	private Long itemId;
-	
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long itemId = (long) 0;
+
 	@ManyToOne
-	@JoinColumn(name="productId")
+	@JoinColumn(name = "productId")
 	private Product product;
-	
-	//private int supplierId;
-	
+
+	// private int supplierId;
+
 	private BigDecimal listPrice;
 	private BigDecimal unitCost;
-	
+
 	private String status;
 	private String attribute1;
 	private String attribute2;
 	private String attribute3;
 	private String attribute4;
 	private String attribute5;
-	
+
 	private int quantity;
 
 	/* JavaBeans Properties */
@@ -70,13 +72,13 @@ public class Item implements Serializable {
 		this.product = product;
 	}
 
-//	public int getSupplierId() {
-//		return supplierId;
-//	}
-//
-//	public void setSupplierId(int supplierId) {
-//		this.supplierId = supplierId;
-//	}
+	// public int getSupplierId() {
+	// return supplierId;
+	// }
+	//
+	// public void setSupplierId(int supplierId) {
+	// this.supplierId = supplierId;
+	// }
 
 	public BigDecimal getListPrice() {
 		return listPrice;
@@ -144,8 +146,8 @@ public class Item implements Serializable {
 
 	/* Public Methods */
 
-//	public String toString() {
-//		return "(" + getItemId().trim() + "-" + getProductId().trim() + ")";
-//	}
+	// public String toString() {
+	// return "(" + getItemId().trim() + "-" + getProductId().trim() + ")";
+	// }
 
 }
