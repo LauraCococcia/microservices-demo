@@ -13,7 +13,7 @@ import io.pivotal.microservices.items.Item;
 /**
  * Home page controller.
  * 
- * @author Paul Chapman
+ * @author 
  */
 @Controller
 public class HomeController {
